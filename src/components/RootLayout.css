@@ -1,0 +1,27 @@
+:root {
+  --primary: linear-gradient(166.57deg, #4f00d0 5.47%, #9250ff 90.36%);
+  --secondary: rgba(70, 70, 185, 0.276);
+}
+/* navbar */
+header nav {
+  display: flex;
+  gap: 16px;
+  justify-content: end;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+header nav h1 {
+  margin-right: auto;
+  border-bottom: 3px solid var(--primary);
+}
+header nav a {
+  text-decoration: none;
+  padding: 6px;
+  border-radius: 4px;
+
+  background: var(--primary);
+  color: white;
+}
+header nav a.active {
+  background: var(--primary);
+}

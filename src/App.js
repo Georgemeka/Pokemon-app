@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ErrorBoundary from './ErrorBoundary';
+import React from 'react'
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+
+
+// import PokemonDetails from './containers/PokemonDetails';
+import Pokedex from './components/Pokedex';
+import PokemonDetails, { pokemonLoader } from './components/PokemonDetails';
+import RootLayout from './components/RootLayout';
+
+
+
+const router = createBrowserRouter(
+
+    createRoutesFromElements(
+        <Route path="/" element={<RootLayout />}>
+            <Route index element={<Pokedex />} />
+            <Route
+                path=":name"
+                element={<PokemonDetails />}
+                loader={pokemonLoader}
+                errorElement={<ErrorBoundary />}
+            />
+
+
+        </Route>
+    )
+)
+
+export default function App() {
+    return (
+        <ErrorBoundary fallback={<div>Error occurred while loading page.</div>}>
+            <RouterProvider router={router} />
+        </ErrorBoundary>
+    )
 }
-
-export default App;
